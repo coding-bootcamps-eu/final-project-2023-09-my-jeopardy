@@ -1,7 +1,15 @@
 <template>
   <h2 class="category-name">{{ category }}</h2>
   <div class="Question" v-for="question in Questions" :key="question.id">
-    <v-btn block rounded="xl" size="x-large" height="6rem">{{ question.value }}</v-btn>
+    <router-link
+      :to="{ name: 'QuestionView', query: { id: question.id, category: category } }"
+      custom
+      v-slot="{ navigate }"
+    >
+      <v-btn @click="navigate" block rounded="xl" size="x-large" height="6rem">{{
+        question.value
+      }}</v-btn>
+    </router-link>
   </div>
 </template>
 <script>
