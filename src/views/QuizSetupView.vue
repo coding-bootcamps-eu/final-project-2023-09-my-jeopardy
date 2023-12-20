@@ -18,17 +18,26 @@
       <v-select label="Category 5" :items="[]"></v-select>
     </v-container>
     <v-container class="buttonBox">
-      <v-btn block rounded="xl" size="x-large" @click="saveToLocal">Start Quiz</v-btn>
-      <v-btn block rounded="s" size="small">Back</v-btn>
+      <router-link class="noLink" to="/QuizTemplateView">
+        <v-btn block rounded="xl" size="x-large" @click="saveToLocal">Start Quiz</v-btn>
+      </router-link>
+      <router-link class="noLink" to="/homescreen">
+        <v-btn block rounded="s" size="small">Back</v-btn>
+      </router-link>
     </v-container>
   </v-container>
 </template>
 
 <script>
 import addPlayer from '@/components/addPlayer.vue'
+import { useUserStore } from '@/stores/user.js'
 export default {
   components: {
     addPlayer
+  },
+  setup() {
+    const userStore = useUserStore()
+    return { userStore }
   },
   data() {
     return {
@@ -45,8 +54,7 @@ export default {
       this.playerTwo = data
     },
     saveToLocal() {
-      localStorage.setItem('playerNames', JSON.stringify([this.playerOne, this.playerTwo]))
-      localStorage.setItem('points', JSON.stringify([0, 0]))
+      this.userStore.initUser(this.playerOne, this.playerTwo)
     }
   }
 }
@@ -76,5 +84,9 @@ export default {
   flex-direction: column;
   max-width: 30rem;
   gap: 3rem;
+}
+.noLink {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
