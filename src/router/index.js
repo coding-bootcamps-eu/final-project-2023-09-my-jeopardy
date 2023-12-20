@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
 import QuizSetupView from '@/views/QuizSetupView.vue'
+import HomeScreenView from '@/views/HomeScreenView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +25,11 @@ const router = createRouter({
       path: '/quizstetup',
       name: 'quizsetup',
       component: QuizSetupView
+    },
+    {
+      path: '/HomeScreen',
+      name: 'homescreen',
+      component: HomeScreenView
     }
   ]
 })
