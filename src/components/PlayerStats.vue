@@ -8,12 +8,32 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/user.js'
 export default {
+  setup() {
+    const userStore = useUserStore()
+    return { userStore }
+  },
   data() {
     return {
-      PlayerName: JSON.parse(localStorage.getItem('playerNames')) || ['Player 1', 'Player 2'],
-      Points: JSON.parse(localStorage.getItem('points')) || [0, 0]
+      PlayerName: [],
+      Points: []
     }
+  },
+  methods: {
+    setPlayername() {
+      const name = []
+      const points = []
+      for (const Name of this.userStore.playerarray) {
+        name.push(Name.playername)
+        points.push(Name.playerpoints)
+      }
+      this.PlayerName = name
+      this.Points = points
+    }
+  },
+  created() {
+    this.setPlayername()
   }
 }
 </script>
