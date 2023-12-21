@@ -1,9 +1,8 @@
 <template>
-  <router-link :to="route">
+  <router-link :to="route" custom v-slot="{ navigate }">
     <v-btn
       @click="navigate"
       :description="description"
-      class="noLink"
       :variant="variant"
       :size="size"
       :rounded="rounded"
@@ -25,9 +24,3 @@ export default {
   }
 }
 </script>
-<style>
-.noLink {
-  text-decoration: none;
-  color: black;
-}
-</style>
