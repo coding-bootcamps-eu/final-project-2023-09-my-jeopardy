@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 import QuizSetupView from '@/views/QuizSetupView.vue'
 import HomeScreenView from '@/views/HomeScreenView.vue'
@@ -11,13 +10,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/QuizTemplateView',
-      name: 'QuizTemplateView',
+      path: '/quiztemplate',
+      name: 'quiztemplate',
       component: QuizTemplateView
     },
     {
@@ -26,7 +20,7 @@ const router = createRouter({
       component: QuizSetupView
     },
     {
-      path: '/homescreen',
+      path: '/',
       name: 'homescreen',
       component: HomeScreenView
     },
@@ -36,8 +30,8 @@ const router = createRouter({
       component: EndScreenView
     },
     {
-      path: '/Question',
-      name: 'QuestionView',
+      path: '/question',
+      name: 'question',
       component: QuestionTemplateView
     }
   ]
