@@ -11,10 +11,12 @@
         height="72"
         class="btn"
       />
+
       <v-btn class="btn">Create Quiz</v-btn>
     </div>
   </body>
 </template>
+
 <script>
 import routeButton from '@/components/routeButton.vue'
 export default {
@@ -23,9 +25,19 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+@import url(https://fonts.bunny.net/css?family=akaya-kanadaka:400);
+* {
+  --primary-color: #f1e0dd;
+  --primary-background-color: #88b7c6;
+  --secondary-background-color: #589bac;
+}
 template,
 body {
+  font-family: 'Akaya Kanadaka', display;
+  background-color: var(--primary-background-color);
+  color: var(--primary-color);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -47,6 +59,6 @@ h1 {
 .btn {
   margin: 3rem;
   text-decoration: none;
-  color: inherit;
+  background-color: var(--secondary-background-color);
 }
 </style>
