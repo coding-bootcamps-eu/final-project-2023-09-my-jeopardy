@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="route" custom v-slot="{ navigate }">
+  <router-link :to="route">
     <v-btn
-      @click="navigate"
+      @click="submit"
       :description="description"
       :variant="variant"
       :size="size"
@@ -21,6 +21,11 @@ export default {
     size: String,
     rounded: String,
     height: String
+  },
+  methods: {
+    submit() {
+      this.$emit('routeEvent')
+    }
   }
 }
 </script>

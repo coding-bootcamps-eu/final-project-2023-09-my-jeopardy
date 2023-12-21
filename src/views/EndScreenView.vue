@@ -8,13 +8,20 @@
       </div>
     </v-container>
     <v-container class="buttonList">
-      <router-link class="noLink" to="/quiztemplate">
-        <v-btn variant="outlined"> Play Again </v-btn>
-      </router-link>
-      <router-link class="noLink" to="/quizsetup">
-        <v-btn variant="outlined"> New Category </v-btn>
-      </router-link>
-      <routeButton to="/" description="Homescreen" variant="outlined" class="noLink" />
+      <routeButton
+        to="/quizsetup"
+        description="Play Again"
+        variant="outlined"
+        class="noLink"
+        size="x-large"
+      />
+      <routeButton
+        to="/"
+        description="Homescreen"
+        variant="outlined"
+        class="noLink"
+        size="x-large"
+      />
     </v-container>
   </v-container>
 </template>

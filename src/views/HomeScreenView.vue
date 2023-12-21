@@ -2,22 +2,27 @@
   <body>
     <h1>My Jeopardy</h1>
     <div class="btn-container">
-      <router-link to="/quizsetup" custom v-slot="{ navigate }">
-        <v-btn
-          @click="navigate"
-          class="btn"
-          rounded="xl"
-          size="x-large"
-          variant="outlined"
-          height="72"
-          >Play Quiz</v-btn
-        >
-      </router-link>
-      <v-btn>Create Quiz</v-btn>
+      <routeButton
+        description="Play Quiz"
+        to="/quizsetup"
+        rounded="xl"
+        size="x-large"
+        variant="outlined"
+        height="72"
+        class="btn"
+      />
+      <v-btn class="btn">Create Quiz</v-btn>
     </div>
   </body>
 </template>
-
+<script>
+import routeButton from '@/components/routeButton.vue'
+export default {
+  components: {
+    routeButton
+  }
+}
+</script>
 <style scoped>
 template,
 body {
@@ -40,7 +45,7 @@ h1 {
   width: 30%;
 }
 .btn {
-  margin-bottom: 2rem;
+  margin: 3rem;
   text-decoration: none;
   color: inherit;
 }
