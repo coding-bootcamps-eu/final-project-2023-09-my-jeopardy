@@ -1,22 +1,39 @@
 <template>
   <h2 class="category-name">{{ category }}</h2>
   <div class="Question" v-for="question in Questions" :key="question.id">
-    <router-link
-      :to="{ name: 'question', query: { id: question.id, category: category } }"
-      custom
-      v-slot="{ navigate }"
-    >
-      <v-btn @click="navigate" block rounded="xl" size="x-large" height="6rem">{{
-        question.value
-      }}</v-btn>
-    </router-link>
+    <routeButton
+      class="singleQuestion"
+      :route="{ name: 'question', query: { id: question.id, category: category } }"
+      :description="String(question.value)"
+      rounded="xl"
+      size="x-large"
+      block="block"
+      height="6rem"
+      :disabled="disabled"
+      @routeEvent.once="disableButton()"
+    />
   </div>
 </template>
 <script>
+import routeButton from '@/components/routeButton.vue'
 export default {
+  components: {
+    routeButton
+  },
   props: {
     category: String,
     Questions: Array
+  },
+  data() {
+    return {
+      disabled: false,
+      block: true
+    }
+  },
+  methods: {
+    disableButton() {
+      this.disabled = !this.disabled
+    }
   }
 }
 </script>

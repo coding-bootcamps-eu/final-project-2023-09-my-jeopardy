@@ -1,27 +1,30 @@
 <template>
-  <router-link :to="route">
-    <v-btn
-      @click="submit"
-      :description="description"
-      :variant="variant"
-      :size="size"
-      :rounded="rounded"
-      :height="height"
-      class="btn"
-      >{{ description }}
-    </v-btn>
-  </router-link>
+  <v-btn
+    :to="route"
+    @click="submit"
+    :description="description"
+    :variant="variant"
+    :size="size"
+    :rounded="rounded"
+    :height="height"
+    :block="block"
+    :disabled="disabled"
+    class="btn"
+    >{{ description }}
+  </v-btn>
 </template>
 
 <script>
 export default {
   props: {
-    route: String,
+    route: Object,
     description: String,
     variant: String,
     size: String,
     rounded: String,
-    height: String
+    height: String,
+    block: Boolean,
+    disabled: Boolean
   },
   methods: {
     submit() {
