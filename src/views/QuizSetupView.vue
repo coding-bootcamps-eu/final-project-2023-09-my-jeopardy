@@ -18,12 +18,16 @@
       <v-select label="Category 5" :items="[]"></v-select>
     </v-container>
     <v-container class="buttonBox">
-      <router-link class="noLink" to="/quiztemplate">
-        <v-btn block rounded="xl" size="x-large" @click="saveToLocal">Start Quiz</v-btn>
-      </router-link>
-      <router-link class="noLink" to="/">
-        <v-btn block rounded="s" size="small">Back</v-btn>
-      </router-link>
+      <routeButton
+        class="noLink"
+        to="/quiztemplate"
+        block
+        rounded="xl"
+        size="x-large"
+        description="Start Quiz"
+        @routeEvent="saveToPinia"
+      />
+      <routeButton class="noLink" to="/" block rounded="s" size="small" description="Back" />
     </v-container>
   </v-container>
 </template>
@@ -31,9 +35,11 @@
 <script>
 import addPlayer from '@/components/addPlayer.vue'
 import { useUserStore } from '@/stores/user.js'
+import routeButton from '@/components/routeButton.vue'
 export default {
   components: {
-    addPlayer
+    addPlayer,
+    routeButton
   },
   setup() {
     const userStore = useUserStore()
@@ -53,7 +59,7 @@ export default {
     getChildDataTwo(data) {
       this.playerTwo = data
     },
-    saveToLocal() {
+    saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
     }
   }
@@ -82,6 +88,7 @@ export default {
 .buttonBox {
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 30rem;
   gap: 3rem;
 }

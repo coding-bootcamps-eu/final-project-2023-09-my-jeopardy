@@ -6,12 +6,17 @@
   <div :key="answer.id" v-for="answer in Question[0].answers">
     <v-btn class="answer" block rounded="xl" size="x-large">{{ answer.text }}</v-btn>
   </div>
+  <routeButton to="/quiztemplate" description="Back " size="large" class="noLink bottomleft" />
 </template>
 
 <script>
+import routeButton from '@/components/routeButton.vue'
 export default {
   created() {
     this.getQuestion(this.$route.query.id)
+  },
+  components: {
+    routeButton
   },
   data() {
     return {
@@ -746,5 +751,9 @@ h2 {
 }
 .answer {
   margin: 1rem;
+}
+.bottomleft {
+  position: absolute;
+  bottom: 0.5rem;
 }
 </style>

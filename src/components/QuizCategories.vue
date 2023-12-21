@@ -2,7 +2,7 @@
   <h2 class="category-name">{{ category }}</h2>
   <div class="Question" v-for="question in Questions" :key="question.id">
     <router-link
-      :to="{ name: 'QuestionView', query: { id: question.id, category: category } }"
+      :to="{ name: 'question', query: { id: question.id, category: category } }"
       custom
       v-slot="{ navigate }"
     >
