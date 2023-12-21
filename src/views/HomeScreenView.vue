@@ -2,27 +2,15 @@
   <body>
     <h1>My Jeopardy</h1>
     <div class="btn-container">
-      <routeButton
-        description="Play Quiz"
-        to="/quizsetup"
-        rounded="xl"
-        size="x-large"
-        variant="outlined"
-        height="72"
-        class="btn"
-      />
-
-      <v-btn class="btn">Create Quiz</v-btn>
+      <v-btn to="/quizsetup" rounded="xl" size="x-large" height="72" class="btn">Play Quiz</v-btn>
+      <v-btn class="btn" size="small" rounded="xl">Create Quiz</v-btn>
     </div>
   </body>
 </template>
 
 <script>
-import routeButton from '@/components/routeButton.vue'
 export default {
-  components: {
-    routeButton
-  }
+  components: {}
 }
 </script>
 
@@ -58,7 +46,6 @@ h1 {
 }
 .btn {
   margin: 3rem;
-  text-decoration: none;
   color: inherit;
   background-color: var(--secondary-background-color);
 }
