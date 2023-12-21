@@ -3,7 +3,8 @@
     <v-responsive class="mx-auto" max-width="250">
       <v-avatar class="avatar" image="https://picsum.photos/200/300" size="75"></v-avatar>
       <v-text-field
-        @change="sendDataToParent"
+        @keydown="sendDataToParent"
+        :rules="[rules.required]"
         label="PlayerName"
         variant="outlined"
         v-model="playerName"
@@ -15,7 +16,10 @@
 export default {
   data() {
     return {
-      playerName: ''
+      playerName: '',
+      rules: {
+        required: (value) => !!value || 'Field is required'
+      }
     }
   },
   methods: {
