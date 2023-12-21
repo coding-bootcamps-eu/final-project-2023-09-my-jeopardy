@@ -19,6 +19,7 @@
     </v-container>
     <v-container class="buttonBox">
       <routeButton
+        v-if="pOneEmpty && pTwoEmpty"
         class="noLink"
         to="/quiztemplate"
         block
@@ -61,6 +62,14 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
+    }
+  },
+  computed: {
+    pOneEmpty() {
+      return this.playerOne.trim() !== ''
+    },
+    pTwoEmpty() {
+      return this.playerTwo.trim() !== ''
     }
   }
 }
