@@ -18,17 +18,16 @@
       <v-select label="Category 5" :items="[]"></v-select>
     </v-container>
     <v-container class="buttonBox">
-      <routeButton
+      <v-btn
         v-if="pOneEmpty && pTwoEmpty"
-        class="noLink"
         to="/quiztemplate"
         block
         rounded="xl"
         size="x-large"
-        description="Start Quiz"
-        @routeEvent="saveToPinia"
-      />
-      <routeButton class="noLink" to="/" block rounded="s" size="small" description="Back" />
+        @click="saveToPinia"
+        >Start Quiz</v-btn
+      >
+      <v-btn to="/" rounded="s" size="small">Back</v-btn>
     </v-container>
   </v-container>
 </template>
@@ -36,11 +35,9 @@
 <script>
 import addPlayer from '@/components/addPlayer.vue'
 import { useUserStore } from '@/stores/user.js'
-import routeButton from '@/components/routeButton.vue'
 export default {
   components: {
-    addPlayer,
-    routeButton
+    addPlayer
   },
   setup() {
     const userStore = useUserStore()

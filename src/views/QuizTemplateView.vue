@@ -9,18 +9,16 @@
   <div class="PlayerStats">
     <PlayerStats />
   </div>
-  <routeButton to="/endscreen" description="Endscreen" size="small" class="noLink" />
+  <v-btn to="/endscreen" size="small">Endscreen</v-btn>
 </template>
 
 <script>
 import QuizCategory from '@/components/QuizCategories.vue'
 import PlayerStats from '@/components/PlayerStats.vue'
-import routeButton from '@/components/routeButton.vue'
 export default {
   components: {
     QuizCategory,
-    PlayerStats,
-    routeButton
+    PlayerStats
   },
   data() {
     return {
