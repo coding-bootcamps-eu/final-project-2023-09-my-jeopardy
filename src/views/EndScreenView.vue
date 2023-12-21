@@ -14,19 +14,21 @@
       <router-link class="noLink" to="/quizstetup">
         <v-btn variant="outlined"> New Category </v-btn>
       </router-link>
-      <router-link class="noLink" to="/homescreen">
-        <v-btn variant="outlined"> Homescreen </v-btn>
-      </router-link>
+      <routeButton to="/homescreen" description="Homescreen" variant="outlined" class="noLink" />
     </v-container>
   </v-container>
 </template>
 
 <script>
 import { useUserStore } from '@/stores/user.js'
+import routeButton from '@/components/routeButton.vue'
 export default {
   setup() {
     const userStore = useUserStore()
     return { userStore }
+  },
+  components: {
+    routeButton
   },
   data() {
     return {
