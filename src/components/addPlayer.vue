@@ -3,7 +3,7 @@
     <v-responsive class="mx-auto" max-width="250">
       <v-avatar class="avatar" image="https://picsum.photos/200/300" size="75"></v-avatar>
       <v-text-field
-        @keydown="sendDataToParent"
+        @input="sendDataToParent"
         :rules="[rules.required]"
         label="PlayerName"
         variant="outlined"
