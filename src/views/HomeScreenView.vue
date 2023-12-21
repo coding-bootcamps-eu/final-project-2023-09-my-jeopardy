@@ -59,6 +59,7 @@ h1 {
 .btn {
   margin: 3rem;
   text-decoration: none;
+  color: inherit;
   background-color: var(--secondary-background-color);
 }
 </style>

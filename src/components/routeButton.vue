@@ -7,8 +7,9 @@
       :size="size"
       :rounded="rounded"
       :height="height"
-      >{{ description }}</v-btn
-    >
+      class="btn"
+      >{{ description }}
+    </v-btn>
   </router-link>
 </template>
 
@@ -29,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn {
+  border: none;
+}
+</style>
