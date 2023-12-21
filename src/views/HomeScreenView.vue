@@ -2,9 +2,17 @@
   <body>
     <h1>My Jeopardy</h1>
     <div class="btn-container">
-      <v-btn class="btn" rounded="xl" size="x-large" variant="outlined" height="72"
-        >Play Quiz</v-btn
-      >
+      <router-link to="/quizsetup" custom v-slot="{ navigate }">
+        <v-btn
+          @click="navigate"
+          class="btn"
+          rounded="xl"
+          size="x-large"
+          variant="outlined"
+          height="72"
+          >Play Quiz</v-btn
+        >
+      </router-link>
       <v-btn>Create Quiz</v-btn>
     </div>
   </body>
@@ -33,5 +41,7 @@ h1 {
 }
 .btn {
   margin-bottom: 2rem;
+  text-decoration: none;
+  color: inherit;
 }
 </style>

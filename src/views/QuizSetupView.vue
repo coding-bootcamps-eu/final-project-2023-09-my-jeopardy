@@ -18,10 +18,10 @@
       <v-select label="Category 5" :items="[]"></v-select>
     </v-container>
     <v-container class="buttonBox">
-      <router-link class="noLink" to="/QuizTemplateView">
+      <router-link class="noLink" to="/quiztemplate">
         <v-btn block rounded="xl" size="x-large" @click="saveToLocal">Start Quiz</v-btn>
       </router-link>
-      <router-link class="noLink" to="/homescreen">
+      <router-link class="noLink" to="/">
         <v-btn block rounded="s" size="small">Back</v-btn>
       </router-link>
     </v-container>
