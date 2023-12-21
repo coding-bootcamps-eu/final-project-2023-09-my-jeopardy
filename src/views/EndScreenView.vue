@@ -11,10 +11,10 @@
       <router-link class="noLink" to="/quiztemplate">
         <v-btn variant="outlined"> Play Again </v-btn>
       </router-link>
-      <router-link class="noLink" to="/quizstetup">
+      <router-link class="noLink" to="/quizsetup">
         <v-btn variant="outlined"> New Category </v-btn>
       </router-link>
-      <router-link class="noLink" to="/homescreen">
+      <router-link class="noLink" to="/">
         <v-btn variant="outlined"> Homescreen </v-btn>
       </router-link>
     </v-container>
