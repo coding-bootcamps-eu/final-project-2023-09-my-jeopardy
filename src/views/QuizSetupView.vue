@@ -101,7 +101,6 @@ export default {
         idArr[3] +
         '&group=' +
         idArr[4]
-      console.log(this.apiUrl)
       this.saveToPinia()
     }
   },
