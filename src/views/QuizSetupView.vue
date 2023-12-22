@@ -11,11 +11,11 @@
       </v-radio-group>
     </v-container>
     <v-container class="dropdownBox" v-if="isHidden === false">
-      <v-select label="Category 1" :items="[]"></v-select>
-      <v-select label="Category 2" :items="[]"></v-select>
-      <v-select label="Category 3" :items="[]"></v-select>
-      <v-select label="Category 4" :items="[]"></v-select>
-      <v-select label="Category 5" :items="[]"></v-select>
+      <v-select v-model="this.selectedGroups[0]" label="Category 1" :items="this.groups"></v-select>
+      <v-select v-model="this.selectedGroups[1]" label="Category 2" :items="this.groups"></v-select>
+      <v-select v-model="this.selectedGroups[2]" label="Category 3" :items="this.groups"></v-select>
+      <v-select v-model="this.selectedGroups[3]" label="Category 4" :items="this.groups"></v-select>
+      <v-select v-model="this.selectedGroups[4]" label="Category 5" :items="this.groups"></v-select>
     </v-container>
     <v-container class="buttonBox">
       <v-btn
@@ -24,7 +24,7 @@
         block
         rounded="xl"
         size="x-large"
-        @click="saveToPinia"
+        @click="saveToPinia, getSelectedGroups"
         >Start Quiz</v-btn
       >
       <v-btn to="/" rounded="s" size="small">Back</v-btn>
@@ -35,19 +35,23 @@
 <script>
 import addPlayer from '@/components/addPlayer.vue'
 import { useUserStore } from '@/stores/user.js'
+import { usegroupStore } from '@/stores/groups.js'
 export default {
   components: {
     addPlayer
   },
   setup() {
     const userStore = useUserStore()
-    return { userStore }
+    const groupStore = usegroupStore()
+    return { userStore, groupStore }
   },
   data() {
     return {
       isHidden: true,
       playerOne: '',
-      playerTwo: ''
+      playerTwo: '',
+      groups: [],
+      selectedGroups: []
     }
   },
   methods: {
@@ -59,6 +63,24 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
+    },
+    getGroupNames() {
+      const arr = []
+      for (const name of this.groupStore.groupsArray) {
+        arr.push(name.title)
+      }
+      return arr
+    },
+    getSelectedGroups() {
+      let idArr = []
+      for (const entry of this.selectedGroups) {
+        for (const j of this.groups) {
+          if (entry === j.title) {
+            idArr.push(j.id)
+            console.log(idArr)
+          }
+        }
+      }
     }
   },
   computed: {
@@ -68,6 +90,14 @@ export default {
     pTwoEmpty() {
       return this.playerTwo.trim() !== ''
     }
+  },
+  created() {
+    fetch('http://localhost:3000/groups')
+      .then((response) => response.json())
+      .then((jsondata) => {
+        this.groups = jsondata
+        this.groupStore.initGroups(jsondata)
+      })
   }
 }
 </script>

@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       Player: {
-        id: 'skghfiwguhef9',
-        name: 'Torben',
+        id: '',
+        name: '',
         points: 0
       },
       Quiz: {
