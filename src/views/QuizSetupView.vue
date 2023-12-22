@@ -20,11 +20,11 @@
     <v-container class="buttonBox">
       <v-btn
         v-if="pOneEmpty && pTwoEmpty"
-        to="/quiztemplate"
+        :to="{ name: 'quiztemplate', query: { url: getSelectedGroups() } }"
         block
         rounded="xl"
         size="x-large"
-        @click="getSelectedGroups"
+        @click="saveToPinia"
         >Start Quiz</v-btn
       >
       <v-btn to="/" rounded="s" size="small">Back</v-btn>
@@ -68,11 +68,6 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
-      fetch(this.apiUrl)
-        .then((res) => res.json())
-        .then((jsondata) => {
-          this.questionStore.initQuestion(jsondata)
-        })
     },
     getGroupNames() {
       const arr = []
@@ -90,7 +85,7 @@ export default {
           }
         }
       }
-      this.apiUrl =
+      return (
         'http://localhost:3000/quiz/collection?group=' +
         idArr[0] +
         '&group=' +
@@ -101,7 +96,7 @@ export default {
         idArr[3] +
         '&group=' +
         idArr[4]
-      this.saveToPinia()
+      )
     }
   },
   computed: {
