@@ -24,10 +24,11 @@
         block
         rounded="xl"
         size="x-large"
-        @click="saveToPinia, getSelectedGroups"
+        @click="getSelectedGroups"
         >Start Quiz</v-btn
       >
       <v-btn to="/" rounded="s" size="small">Back</v-btn>
+      <v-btn @click="getSelectedGroups">Hallo</v-btn>
     </v-container>
   </v-container>
 </template>
@@ -46,9 +47,7 @@ export default {
     const questionStore = useQuestionStore()
     const userStore = useUserStore()
     const groupStore = usegroupStore()
-    return { userStore, groupStore }
     return { userStore, questionStore, groupStore }
-
   },
   data() {
     return {
@@ -56,7 +55,8 @@ export default {
       playerOne: '',
       playerTwo: '',
       groups: [],
-      selectedGroups: []
+      selectedGroups: [],
+      apiUrl: ''
     }
   },
   methods: {
@@ -68,11 +68,11 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
-      fetch(
-        'http://localhost:3000/quiz/collection?group=90270373-7e21-4f98-940c-b4c20ab21062&group=42344512-e214-458c-be19-63c029907a56'
-      )
+      fetch(this.apiUrl)
         .then((res) => res.json())
-        .then((jsondata) => this.questionStore.initQuestion(jsondata))
+        .then((jsondata) => {
+          this.questionStore.initQuestion(jsondata)
+        })
     },
     getGroupNames() {
       const arr = []
@@ -87,10 +87,23 @@ export default {
         for (const j of this.groups) {
           if (entry === j.title) {
             idArr.push(j.id)
-            console.log(idArr)
           }
         }
       }
+      this.apiUrl =
+        'http://localhost:3000/quiz/collection?group=' +
+        idArr[0] +
+        '&group=' +
+        idArr[1] +
+        '&group=' +
+        idArr[2] +
+        '&group=' +
+        idArr[3] +
+        '&group=' +
+        idArr[4]
+      console.log(this.apiUrl)
+      this.saveToPinia()
+    }
   },
   computed: {
     pOneEmpty() {
