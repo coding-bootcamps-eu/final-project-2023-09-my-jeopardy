@@ -1,8 +1,8 @@
 <template>
   <h1 class="headline">My Jeopardy</h1>
   <div class="category-container">
-    <div class="category" :key="category.id" v-for="(category, index) in Quiz.categorys">
-      <QuizCategory :category="category.title" :Questions="getQuestions(index)" />
+    <div class="category" :key="category.id" v-for="category in this.groupStore.groupsArray">
+      <QuizCategory :category="category.title" />
     </div>
   </div>
   <br />
@@ -15,7 +15,9 @@
 <script>
 import QuizCategory from '@/components/QuizCategories.vue'
 import PlayerStats from '@/components/PlayerStats.vue'
+import { usegroupStore } from '@/stores/groups.js'
 import { useQuestionStore } from '@/stores/questions.js'
+
 export default {
   components: {
     QuizCategory,
@@ -23,18 +25,27 @@ export default {
   },
   setup() {
     const questionStore = useQuestionStore()
-    return { questionStore }
+    const groupStore = usegroupStore()
+    return { groupStore, questionStore }
   },
   data() {
-    return {}   
+    return {
+      apiUrl: this.$route.query.url
+    }
+  },
+  created() {
+    this.saveQuestions()
   },
   methods: {
-    getQuestions(index) {
-      return this.Quiz.questions.filter((Object) => {
-        if (Object.groupId === this.Quiz.categorys[index].id) {
-          return Object
-        }
-      })
+    saveQuestions() {
+      console.log('test')
+      console.log(this.$route.query.url)
+      fetch(this.$route.query.url)
+        .then((res) => res.json())
+        .then((jsondata) => {
+          console.log('1')
+          this.questionStore.initQuestion(jsondata)
+        })
     }
   }
 }
