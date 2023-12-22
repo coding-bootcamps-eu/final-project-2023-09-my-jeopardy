@@ -62,7 +62,9 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
-      fetch('http://localhost:3000/questions')
+      fetch(
+        'http://localhost:3000/quiz/collection?group=90270373-7e21-4f98-940c-b4c20ab21062&group=42344512-e214-458c-be19-63c029907a56'
+      )
         .then((res) => res.json())
         .then((jsondata) => this.questionStore.initQuestion(jsondata))
     }
