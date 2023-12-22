@@ -26,7 +26,7 @@ export default {
     return { questionStore }
   },
   data() {
-    return {}
+    return {}   
   },
   methods: {
     getQuestions(index) {
