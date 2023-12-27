@@ -6,10 +6,12 @@
       class="singleQuestion"
       :route="{ name: 'question', query: { id: question.id, category: category } }"
       :description="String(question.value)"
+      :disabled="question.played"
       rounded="xl"
       size="x-large"
       block="block"
       height="6rem"
+      @routeEvent="disableButton(question.id)"
     />
   </div>
 </template>
@@ -24,7 +26,6 @@ export default {
     const questionStore = useQuestionStore()
     return { questionStore }
   },
-
   props: {
     category: String,
     Questions: String
@@ -44,8 +45,12 @@ export default {
     }
   },
   methods: {
-    disableButton() {
-      this.disabled = !this.disabled
+    disableButton(id) {
+      this.questionStore.questions.data.forEach((Object) => {
+        if (Object.id === id) {
+          Object.played = true
+        }
+      })
     }
   }
 }
