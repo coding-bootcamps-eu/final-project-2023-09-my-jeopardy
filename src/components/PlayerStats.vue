@@ -1,6 +1,11 @@
 <template>
   <div class="player-container">
-    <div class="player" :key="index" v-for="(Player, index) in PlayerName">
+    <div
+      class="player"
+      :class="{ active: userStore.playerarray[index].active }"
+      :key="index"
+      v-for="(Player, index) in PlayerName"
+    >
       <h2>{{ Player }}</h2>
       <h3>{{ Points[index] }}</h3>
     </div>
@@ -39,6 +44,9 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  background-color: red;
+}
 .player-container {
   display: flex;
   justify-content: center;

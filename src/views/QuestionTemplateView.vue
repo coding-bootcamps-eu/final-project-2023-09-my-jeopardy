@@ -18,14 +18,20 @@
       >{{ answer.text }}</v-btn
     >
   </div>
-  <v-btn to="/quiztemplate" size="small">Back</v-btn>
+
+  <v-btn @click="swapActivePlayer()" v-if="disabled" to="/quiztemplate" size="small">Back</v-btn>
+  <Player-Stats />
 </template>
 
 <script>
 import { useQuestionStore } from '@/stores/questions.js'
 import { useUserStore } from '@/stores/user.js'
+import PlayerStats from '@/components/PlayerStats.vue'
 
 export default {
+  components: {
+    PlayerStats
+  },
   setup() {
     const questionStore = useQuestionStore()
     const userStore = useUserStore()
@@ -34,6 +40,9 @@ export default {
   created() {
     this.getQuestion(this.$route.query.id)
   },
+  Unmounted() {
+    this.swapActivePlayer()
+  },
   data() {
     return {
       Question: Object,
@@ -41,7 +50,18 @@ export default {
       result: []
     }
   },
-  computed: {},
+  computed: {
+    activePlayer() {
+      for (let i = 0; i < this.userStore.playerarray.length; i++) {
+        if (this.userStore.playerarray[i].active) {
+          console.log(i)
+          return i
+        }
+      }
+      console.log('fail')
+      return 0
+    }
+  },
   methods: {
     setWrongAnswer(id) {
       if (this.result.length > 0) {
@@ -80,9 +100,12 @@ export default {
         .then((jsondata) => {
           this.result = jsondata.details[0].answerDetails
           if (jsondata.details[0].isCorrect) {
-            this.userStore.playerarray[0].playerpoints += this.Question[0].value
+            this.userStore.playerarray[this.activePlayer].playerpoints += this.Question[0].value
           }
         })
+    },
+    swapActivePlayer() {
+      this.userStore.playerarray.forEach((Player) => (Player.active = !Player.active))
     }
   }
 }
