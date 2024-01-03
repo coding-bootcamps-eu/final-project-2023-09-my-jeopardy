@@ -9,6 +9,7 @@ export const useQuestionStore = defineStore('questionstore', {
   actions: {
     initQuestion(Apidata) {
       this.questions = Apidata
+      this.questions.data.forEach((Object) => (Object.played = false))
     }
   }
 })
