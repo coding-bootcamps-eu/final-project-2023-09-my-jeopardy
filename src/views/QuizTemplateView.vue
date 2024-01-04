@@ -1,7 +1,7 @@
 <template>
   <h1 class="headline">My Jeopardy</h1>
   <div class="category-container">
-    <div class="category" :key="category.id" v-for="category in this.groupStore.groupsArray">
+    <div class="category" :key="category.id" v-for="category in this.groupStore.sortedGroups">
       <QuizCategory :category="category.title" />
     </div>
   </div>
@@ -38,14 +38,13 @@ export default {
   },
   methods: {
     saveQuestions() {
-      console.log('test')
-      console.log(this.$route.query.url)
-      fetch(this.$route.query.url)
-        .then((res) => res.json())
-        .then((jsondata) => {
-          console.log('1')
-          this.questionStore.initQuestion(jsondata)
-        })
+      if (this.questionStore.questions.data.length < 1) {
+        fetch(this.$route.query.url)
+          .then((res) => res.json())
+          .then((jsondata) => {
+            this.questionStore.initQuestion(jsondata)
+          })
+      }
     }
   }
 }

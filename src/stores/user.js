@@ -4,8 +4,8 @@ export const useUserStore = defineStore('userstore', {
   state() {
     return {
       playerarray: [
-        { playername: '', playerpoints: 0 },
-        { playername: '', playerpoints: 0 }
+        { playername: '', playerpoints: 0, active: true },
+        { playername: '', playerpoints: 0, active: false }
       ]
     }
   },
