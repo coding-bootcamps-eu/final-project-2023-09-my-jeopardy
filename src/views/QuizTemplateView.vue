@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     saveQuestions() {
-      if (this.questionStore.questions.data.length < 1) {
+      if (this.$route.query.url != undefined) {
         fetch(this.$route.query.url)
           .then((res) => res.json())
           .then((jsondata) => {

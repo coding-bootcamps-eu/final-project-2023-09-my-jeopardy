@@ -19,7 +19,7 @@
     >
   </div>
 
-  <v-btn @click="swapActivePlayer()" v-if="disabled" to="/quiztemplate" size="small">Back</v-btn>
+  <v-btn @click="swapActivePlayer()" v-if="disabled" :to="link" size="small">Weiter</v-btn>
   <Player-Stats />
 </template>
 
@@ -39,6 +39,7 @@ export default {
   },
   created() {
     this.getQuestion(this.$route.query.id)
+    this.finishQuiz()
   },
   Unmounted() {
     this.swapActivePlayer()
@@ -47,7 +48,8 @@ export default {
     return {
       Question: Object,
       disabled: false,
-      result: []
+      result: [],
+      link: '/quiztemplate'
     }
   },
   computed: {
@@ -106,6 +108,19 @@ export default {
     },
     swapActivePlayer() {
       this.userStore.playerarray.forEach((Player) => (Player.active = !Player.active))
+    },
+    finishQuiz() {
+      let endscreen = false
+      this.questionStore.questions.data.forEach((question) => {
+        if (!question.played) {
+          endscreen = false
+          return
+        }
+        endscreen = true
+      })
+      if (endscreen) {
+        this.link = '/endscreen'
+      }
     }
   }
 }
