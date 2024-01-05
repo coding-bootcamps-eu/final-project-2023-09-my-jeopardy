@@ -9,11 +9,13 @@
   <div class="PlayerStats">
     <PlayerStats />
   </div>
-  <v-btn to="/endscreen" size="small">Endscreen</v-btn>
+  <v-btn @click="popup = true" size="small">Endscreen</v-btn>
+  <ConfirmEndscreen v-if="popup" @ClosePopup="popup = false" />
 </template>
 
 <script>
 import QuizCategory from '@/components/QuizCategories.vue'
+import ConfirmEndscreen from '@/components/ConfirmEndscreen.vue'
 import PlayerStats from '@/components/PlayerStats.vue'
 import { usegroupStore } from '@/stores/groups.js'
 import { useQuestionStore } from '@/stores/questions.js'
@@ -21,7 +23,8 @@ import { useQuestionStore } from '@/stores/questions.js'
 export default {
   components: {
     QuizCategory,
-    PlayerStats
+    PlayerStats,
+    ConfirmEndscreen
   },
   setup() {
     const questionStore = useQuestionStore()
@@ -30,7 +33,8 @@ export default {
   },
   data() {
     return {
-      apiUrl: this.$route.query.url
+      apiUrl: this.$route.query.url,
+      popup: false
     }
   },
   created() {
