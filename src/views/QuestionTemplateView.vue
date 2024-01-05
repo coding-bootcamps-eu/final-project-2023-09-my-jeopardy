@@ -110,14 +110,12 @@ export default {
       this.userStore.playerarray.forEach((Player) => (Player.active = !Player.active))
     },
     finishQuiz() {
-      let endscreen = false
-      this.questionStore.questions.data.forEach((question) => {
-        if (!question.played) {
+      let endscreen = true
+      for (let i = 0; i < this.questionStore.questions.data.length; i++) {
+        if (!this.questionStore.questions.data.played) {
           endscreen = false
-          return
         }
-        endscreen = true
-      })
+      }
       if (endscreen) {
         this.link = '/endscreen'
       }
