@@ -1,13 +1,13 @@
 <template>
   <v-container class="flexPlayer">
     <v-responsive class="mx-auto" max-width="250">
-      <v-avatar class="avatar" image="https://picsum.photos/200/300" size="75"></v-avatar>
       <v-text-field
         @input="sendDataToParent"
         :rules="[rules.required]"
         label="PlayerName"
-        variant="outlined"
+        variant="underlined"
         v-model="playerName"
+        class="nameInput"
       ></v-text-field>
     </v-responsive>
   </v-container>
@@ -30,20 +30,14 @@ export default {
 }
 </script>
 <style>
-.roundedImg {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
 .flexPlayer {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-.avatar {
-  margin: 1rem;
+
+.nameInput {
+  color: black;
 }
 </style>
