@@ -1,26 +1,28 @@
 <template>
-  <h1>My Jeopardy</h1>
-  <h2>{{ $route.query.category }}</h2>
-  <h3>{{ Question[0].value }}</h3>
-  <p>{{ Question[0].question }}</p>
-  <div :key="answer.id" v-for="answer in Question[0].answers">
-    <v-btn
-      @click="getAnswer($route.query.id, answer.id)"
-      :class="{
-        answer: true,
-        'wrong-answer': setWrongAnswer(answer.id),
-        'right-answer': setRightAnswer(answer.id)
-      }"
-      block
-      rounded="xl"
-      size="x-large"
-      :disabled="disabled"
-      >{{ answer.text }}</v-btn
-    >
-  </div>
+  <body class="body">
+    <h1>My Jeopardy</h1>
+    <h2>{{ $route.query.category }}</h2>
+    <h3>{{ Question[0].value }}</h3>
+    <p>{{ Question[0].question }}</p>
+    <div :key="answer.id" v-for="answer in Question[0].answers">
+      <v-btn
+        @click="getAnswer($route.query.id, answer.id)"
+        :class="{
+          btn: true,
+          answer: true,
+          'wrong-answer': setWrongAnswer(answer.id),
+          'right-answer': setRightAnswer(answer.id)
+        }"
+        rounded="xl"
+        size="x-large"
+        :disabled="disabled"
+        >{{ answer.text }}</v-btn
+      >
+    </div>
 
-  <v-btn @click="swapActivePlayer()" v-if="disabled" :to="link" size="small">Weiter</v-btn>
-  <Player-Stats />
+    <v-btn class="btn" @click="swapActivePlayer()" v-if="disabled" :to="link">Weiter</v-btn>
+    <Player-Stats />
+  </body>
 </template>
 
 <script>
@@ -126,7 +128,6 @@ export default {
 
 <style scoped>
 * {
-  margin: 1rem;
   font-size: 2rem;
   text-align: center;
 }
@@ -138,6 +139,7 @@ h2 {
 }
 .answer {
   margin: 1rem;
+  width: 70%;
 }
 
 .wrong-answer {

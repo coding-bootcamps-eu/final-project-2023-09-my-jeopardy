@@ -44,8 +44,18 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-size: 2.5rem;
+}
 .active {
-  background-color: red;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px 10px white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  border-radius: 2rem;
+  cursor: pointer;
 }
 .player-container {
   display: flex;
