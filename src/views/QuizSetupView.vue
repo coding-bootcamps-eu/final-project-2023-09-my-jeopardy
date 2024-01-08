@@ -1,5 +1,7 @@
 <template>
   <v-container class="setupBox body">
+    <h1 class="headLine">My Jeopardy</h1>
+    <h2 class="smallblack">Setup</h2>
     <v-container class="playerBox">
       <addPlayer @transferName="getChildDataOne" />
       <addPlayer @transferName="getChildDataTwo" />
@@ -65,7 +67,6 @@
         >Start Quiz</v-btn
       >
       <v-btn class="btn" to="/" rounded="s" size="small">Back</v-btn>
-      <v-btn @click="getSelectedGroups">Hallo</v-btn>
     </v-container>
   </v-container>
 </template>
@@ -178,6 +179,7 @@ export default {
       .then((jsondata) => {
         this.groups = jsondata
         this.groupStore.initGroups(jsondata)
+        this.groupStore.shuffle()
       })
   },
   watch: {
@@ -204,6 +206,8 @@ export default {
   flex-direction: column;
   max-width: 100%;
   margin: 0;
+  justify-content: center;
+  align-items: center;
 }
 .playerBox {
   margin-top: 3rem;
@@ -214,10 +218,12 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  color: black;
 }
 .dropdownBox {
   display: flex;
   gap: 2rem;
+  color: black;
 }
 .buttonBox {
   display: flex;
@@ -229,5 +235,12 @@ export default {
 .noLink {
   text-decoration: none;
   color: inherit;
+}
+.headLine {
+  font-size: 5rem;
+  margin: 3rem;
+}
+.smallblack {
+  color: black;
 }
 </style>
