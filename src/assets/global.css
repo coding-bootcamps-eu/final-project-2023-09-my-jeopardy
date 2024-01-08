@@ -1,0 +1,18 @@
+@import url(https://fonts.bunny.net/css?family=akaya-kanadaka:400);
+* {
+  --primary-color: #f1e0dd;
+  --primary-background-color: #88b7c6;
+  --secondary-background-color: #589bac;
+  font-family: 'Akaya Kanadaka', display;
+}
+.body {
+  height: 100%;
+  max-width: 100%;
+  margin: 0;
+  background-color: var(--primary-background-color);
+  color: var(--primary-color);
+}
+.btn {
+  background-color: var(--secondary-background-color);
+  color: var(--primary-color);
+}

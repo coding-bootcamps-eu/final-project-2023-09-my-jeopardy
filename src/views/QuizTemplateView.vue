@@ -1,16 +1,18 @@
 <template>
-  <h1 class="headline">My Jeopardy</h1>
-  <div class="category-container">
-    <div class="category" :key="category.id" v-for="category in this.groupStore.sortedGroups">
-      <QuizCategory :category="category.title" />
+  <body class="body">
+    <h1 class="headline">My Jeopardy</h1>
+    <div class="category-container">
+      <div class="category" :key="category.id" v-for="category in this.groupStore.sortedGroups">
+        <QuizCategory :category="category.title" />
+      </div>
     </div>
-  </div>
-  <br />
-  <div class="PlayerStats">
-    <PlayerStats />
-  </div>
-  <v-btn @click="popup = true" size="small">Endscreen</v-btn>
-  <ConfirmEndscreen v-if="popup" @ClosePopup="popup = false" />
+    <br />
+    <div class="PlayerStats">
+      <PlayerStats />
+    </div>
+    <v-btn class="btn" @click="popup = true" size="small">Endscreen</v-btn>
+    <ConfirmEndscreen v-if="popup" @ClosePopup="popup = false" />
+  </body>
 </template>
 
 <script>
@@ -57,7 +59,6 @@ export default {
 <style scoped>
 .headline {
   text-align: center;
-  margin-top: 1rem;
 }
 .category-container {
   display: flex;

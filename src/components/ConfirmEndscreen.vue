@@ -1,10 +1,10 @@
 <template>
   <div class="popup">
-    <div class="popup-inner">
+    <div class="popup-inner btn">
       <h2>Quiz beenden</h2>
       <p>Möchtest du das Quiz wirklich jetzt beenden ?</p>
-      <v-btn class="popup-close" to="/endscreen">Ja</v-btn>
-      <v-btn class="popup-close" @click="ClosePopup()">Nein</v-btn>
+      <v-btn to="/endscreen">Ja</v-btn>
+      <v-btn @click="ClosePopup()">Nein</v-btn>
     </div>
   </div>
 </template>
@@ -20,6 +20,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  color: black;
+}
 .popup {
   position: fixed;
   top: 0;
@@ -35,6 +38,9 @@ export default {
 }
 .popup-inner {
   background: #fff;
-  padding: 32px;
+  padding: 50px;
+}
+.color {
+  color: black;
 }
 </style>

@@ -1,29 +1,31 @@
 <template>
-  <v-btn class="highscore" variant="tonal"> View HighscoreList </v-btn>
-  <v-container class="flexContainer">
-    <h1 class="topHeader">Results</h1>
-    <v-container class="scoreList">
-      <div class="player" :key="index" v-for="(Player, index) in PlayerName">
-        <h2>{{ Player }} {{ Points[index] }}</h2>
-      </div>
+  <body class="body">
+    <v-btn class="highscore" variant="tonal"> View HighscoreList </v-btn>
+    <v-container class="flexContainer">
+      <h1 class="topHeader">Results</h1>
+      <v-container class="scoreList">
+        <div class="player" :key="index" v-for="(Player, index) in PlayerName">
+          <h2>{{ Player }} {{ Points[index] }}</h2>
+        </div>
+      </v-container>
+      <v-container class="buttonList">
+        <routeButton
+          to="/quizsetup"
+          description="Play Again"
+          variant="outlined"
+          class="noLink"
+          size="x-large"
+        />
+        <routeButton
+          to="/"
+          description="Homescreen"
+          variant="outlined"
+          class="noLink"
+          size="x-large"
+        />
+      </v-container>
     </v-container>
-    <v-container class="buttonList">
-      <routeButton
-        to="/quizsetup"
-        description="Play Again"
-        variant="outlined"
-        class="noLink"
-        size="x-large"
-      />
-      <routeButton
-        to="/"
-        description="Homescreen"
-        variant="outlined"
-        class="noLink"
-        size="x-large"
-      />
-    </v-container>
-  </v-container>
+  </body>
 </template>
 
 <script>
