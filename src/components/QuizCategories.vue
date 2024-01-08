@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-size: 1.5rem;
+}
 .category-name {
   text-align: center;
 }

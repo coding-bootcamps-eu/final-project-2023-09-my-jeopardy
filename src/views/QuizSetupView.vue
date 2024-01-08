@@ -1,5 +1,5 @@
 <template>
-  <v-container class="setupBox">
+  <v-container class="setupBox body">
     <v-container class="playerBox">
       <addPlayer @transferName="getChildDataOne" />
       <addPlayer @transferName="getChildDataTwo" />
@@ -20,6 +20,7 @@
     <v-container class="buttonBox">
       <v-btn
         v-if="pOneEmpty && pTwoEmpty"
+        class="btn"
         :to="{ name: 'quiztemplate', query: { url: getSelectedGroups() } }"
         block
         rounded="xl"
@@ -27,7 +28,7 @@
         @click="saveToPinia"
         >Start Quiz</v-btn
       >
-      <v-btn to="/" rounded="s" size="small">Back</v-btn>
+      <v-btn class="btn" to="/" rounded="s" size="small">Back</v-btn>
       <v-btn @click="getSelectedGroups">Hallo</v-btn>
     </v-container>
   </v-container>
@@ -123,6 +124,8 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  margin: 0;
 }
 .playerBox {
   margin-top: 3rem;
