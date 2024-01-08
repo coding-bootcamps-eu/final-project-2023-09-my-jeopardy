@@ -5,21 +5,57 @@
       <addPlayer @transferName="getChildDataTwo" />
     </v-container>
     <v-container class="catBox">
-      <v-radio-group>
-        <v-radio label="Random Categories" value="Random" @click="isHidden = true"></v-radio>
-        <v-radio label="Choose Categories" value="Choose" @click="isHidden = false"></v-radio>
+      <v-radio-group v-model="selectedRadio">
+        <v-radio
+          label="Random Categories"
+          value="random"
+          @click="(isHidden = true), (random = true), groupStore.shuffle()"
+        ></v-radio>
+        <v-radio
+          label="Choose Categories"
+          value="choose"
+          @click="(isHidden = false), (random = false)"
+        ></v-radio>
       </v-radio-group>
     </v-container>
     <v-container class="dropdownBox" v-if="isHidden === false">
-      <v-select v-model="this.selectedGroups[0]" label="Category 1" :items="this.groups"></v-select>
-      <v-select v-model="this.selectedGroups[1]" label="Category 2" :items="this.groups"></v-select>
-      <v-select v-model="this.selectedGroups[2]" label="Category 3" :items="this.groups"></v-select>
-      <v-select v-model="this.selectedGroups[3]" label="Category 4" :items="this.groups"></v-select>
-      <v-select v-model="this.selectedGroups[4]" label="Category 5" :items="this.groups"></v-select>
+      <v-select
+        v-model="this.selectedGroups[0]"
+        label="Category 1"
+        :items="this.groups"
+        :options="selectOptions"
+      ></v-select>
+      <v-select
+        v-model="this.selectedGroups[1]"
+        label="Category 2"
+        :items="this.groups"
+        :options="selectOptions"
+      ></v-select>
+      <v-select
+        v-model="this.selectedGroups[2]"
+        label="Category 3"
+        :items="this.groups"
+        :options="selectOptions"
+      ></v-select>
+      <v-select
+        v-model="this.selectedGroups[3]"
+        label="Category 4"
+        :items="this.groups"
+        :options="selectOptions"
+      ></v-select>
+      <v-select
+        v-model="this.selectedGroups[4]"
+        label="Category 5"
+        :items="this.groups"
+        :options="selectOptions"
+      ></v-select>
     </v-container>
     <v-container class="buttonBox">
       <v-btn
-        v-if="pOneEmpty && pTwoEmpty"
+        v-if="
+          (pOneEmpty && pTwoEmpty && allSelectsHaveValue) ||
+          (this.random === true && pOneEmpty && pTwoEmpty)
+        "
         class="btn"
         :to="{ name: 'quiztemplate', query: { url: getSelectedGroups() } }"
         block
@@ -55,9 +91,18 @@ export default {
       isHidden: true,
       playerOne: '',
       playerTwo: '',
+      random: true,
       groups: [],
-      selectedGroups: [],
-      apiUrl: ''
+      selectedGroups: ['', '', '', '', ''],
+      selectOptions: [
+        { label: 'Option 1 Label', value: 'option1' },
+        { label: 'Option 2 Label', value: 'option2' },
+        { label: 'Option 3 Label', value: 'option3' },
+        { label: 'Option 4 Label', value: 'option4' },
+        { label: 'Option 5 Label', value: 'option5' }
+      ],
+      apiUrl: '',
+      selectedRadio: 'random'
     }
   },
   methods: {
@@ -79,26 +124,41 @@ export default {
       return arr
     },
     getSelectedGroups() {
-      let idArr = []
-      for (const entry of this.selectedGroups) {
-        for (const j of this.groups) {
-          if (entry === j.title) {
-            idArr.push(j.id)
+      if (this.random === false) {
+        let idArr = []
+        for (const entry of this.selectedGroups) {
+          for (const j of this.groups) {
+            if (entry === j.title) {
+              idArr.push(j.id)
+            }
           }
         }
+        return (
+          'http://localhost:3000/quiz/collection?group=' +
+          idArr[0] +
+          '&group=' +
+          idArr[1] +
+          '&group=' +
+          idArr[2] +
+          '&group=' +
+          idArr[3] +
+          '&group=' +
+          idArr[4]
+        )
+      } else {
+        return (
+          'http://localhost:3000/quiz/collection?group=' +
+          this.groupStore.groupsArray[0].id +
+          '&group=' +
+          this.groupStore.groupsArray[1].id +
+          '&group=' +
+          this.groupStore.groupsArray[2].id +
+          '&group=' +
+          this.groupStore.groupsArray[3].id +
+          '&group=' +
+          this.groupStore.groupsArray[4].id
+        )
       }
-      return (
-        'http://localhost:3000/quiz/collection?group=' +
-        idArr[0] +
-        '&group=' +
-        idArr[1] +
-        '&group=' +
-        idArr[2] +
-        '&group=' +
-        idArr[3] +
-        '&group=' +
-        idArr[4]
-      )
     }
   },
   computed: {
@@ -107,6 +167,9 @@ export default {
     },
     pTwoEmpty() {
       return this.playerTwo.trim() !== ''
+    },
+    allSelectsHaveValue() {
+      return this.selectedGroups.every((group) => group !== '')
     }
   },
   created() {
@@ -116,6 +179,21 @@ export default {
         this.groups = jsondata
         this.groupStore.initGroups(jsondata)
       })
+  },
+  watch: {
+    selectedGroups: {
+      handler(newValues) {
+        console.log(this.selectedGroups)
+        for (let i = 0; i < this.selectedGroups.length; i++) {
+          for (let j = i + 1; j < this.selectedGroups.length; j++) {
+            if (newValues[i] === newValues[j]) {
+              this.selectedGroups[j] = ''
+            }
+          }
+        }
+      },
+      deep: true
+    }
   }
 }
 </script>
