@@ -4,8 +4,10 @@
     <v-container class="flexContainer">
       <h1 class="topHeader">Results</h1>
       <v-container class="scoreList">
-        <div class="player" :key="index" v-for="(Player, index) in PlayerName">
-          <h2>{{ Player }} {{ Points[index] }}</h2>
+        <h2 v-if="Tie">Tie!</h2>
+        <h2 v-else>{{ this.userStore.playerarray[0].playername }} won!</h2>
+        <div class="player" :key="index" v-for="(Player, index) in this.userStore.playerarray">
+          <h3>{{ Player.playername }}: {{ Player.playerpoints }}</h3>
         </div>
       </v-container>
       <v-container class="buttonList">
@@ -40,25 +42,22 @@ export default {
     routeButton
   },
   data() {
-    return {
-      PlayerName: [],
-      Points: []
-    }
+    return {}
   },
   methods: {
-    setPlayername() {
-      const name = []
-      const points = []
-      for (const Name of this.userStore.playerarray) {
-        name.push(Name.playername)
-        points.push(Name.playerpoints)
-      }
-      this.PlayerName = name
-      this.Points = points
+    sortArrayForResult() {
+      this.userStore.playerarray.sort((a, b) => b.playerpoints - a.playerpoints)
+    }
+  },
+  computed: {
+    Tie() {
+      return (
+        this.userStore.playerarray[0].playerpoints === this.userStore.playerarray[1].playerpoints
+      )
     }
   },
   created() {
-    this.setPlayername()
+    this.sortArrayForResult()
   }
 }
 </script>
