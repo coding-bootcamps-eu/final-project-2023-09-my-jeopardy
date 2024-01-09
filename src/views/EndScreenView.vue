@@ -1,6 +1,13 @@
 <template>
   <body class="body">
-    <v-btn class="highscore" variant="tonal"> View HighscoreList </v-btn>
+    <v-btn
+      class="highscore"
+      variant="tonal"
+      @click="(popup = true), sortHighscoreList()"
+      size="small"
+      >View HighscoreList</v-btn
+    >
+    <HighScorePopup v-if="popup === true" :dataArray="highscoreList" @ClosePopup="popup = false" />
     <v-container class="flexContainer">
       <h1 class="topHeader">Results</h1>
       <v-container class="scoreList">
@@ -33,20 +40,68 @@
 <script>
 import { useUserStore } from '@/stores/user.js'
 import routeButton from '@/components/routeButton.vue'
+import HighScorePopup from '@/components/HighScorePopup.vue'
 export default {
   setup() {
     const userStore = useUserStore()
     return { userStore }
   },
   components: {
-    routeButton
+    routeButton,
+    HighScorePopup
   },
   data() {
-    return {}
+    return {
+      highscoreList: [],
+      popup: false
+    }
   },
   methods: {
     sortArrayForResult() {
       this.userStore.playerarray.sort((a, b) => b.playerpoints - a.playerpoints)
+    },
+    deleteLastHighscore() {
+      console.log(this.highscoreList)
+      for (const player of this.userStore.playerarray) {
+        let lowPoints = Math.min(...this.highscoreList.map((obj) => obj.playerpoints))
+        console.log(lowPoints)
+        let playersWithMinPoints = this.highscoreList.filter(
+          (player) => player.playerpoints === lowPoints
+        )
+        let minPLayerID = playersWithMinPoints[0].id
+        let minPlayerPoints = playersWithMinPoints[0].playerpoints
+        if (player.playerpoints >= minPlayerPoints) {
+          //API wird angepasst -> delete lowest player -> push new player -> update local highscore
+          this.fetchDelete(minPLayerID)
+          this.fetchCreate(player)
+          this.highscoreList = this.highscoreList.filter((player) => player.id !== minPLayerID)
+          this.highscoreList.push(player)
+        }
+      }
+      console.log(this.highscoreList)
+    },
+    fetchHighscore() {
+      fetch('http://localhost:3000/highscore')
+        .then((request) => request.json())
+        .then((jsondata) => {
+          this.highscoreList = jsondata
+          this.deleteLastHighscore()
+        })
+    },
+    fetchDelete(id) {
+      fetch('http://localhost:3000/highscore/' + id, {
+        method: 'DELETE'
+      })
+    },
+    fetchCreate(player) {
+      fetch('http://localhost:3000/highscore', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(player)
+      })
+    },
+    sortHighscoreList() {
+      this.highscoreList = this.highscoreList.sort((a, b) => b.playerpoints - a.playerpoints)
     }
   },
   computed: {
@@ -57,6 +112,7 @@ export default {
     }
   },
   created() {
+    this.fetchHighscore()
     this.sortArrayForResult()
   }
 }
