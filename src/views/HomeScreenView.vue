@@ -3,7 +3,7 @@
     <h1>My Jeopardy</h1>
     <div class="btn-container">
       <v-btn to="/quizsetup" rounded="xl" size="x-large" height="72" class="btn">Play Quiz</v-btn>
-      <v-btn class="btn" size="small" rounded="xl">Create Quiz</v-btn>
+      <v-btn to="/quizdata" class="btn" size="small" rounded="xl">Quiz Data</v-btn>
     </div>
   </body>
 </template>

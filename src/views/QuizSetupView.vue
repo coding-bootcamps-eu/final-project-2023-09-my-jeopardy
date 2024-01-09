@@ -76,6 +76,7 @@ import addPlayer from '@/components/addPlayer.vue'
 import { useUserStore } from '@/stores/user.js'
 import { usegroupStore } from '@/stores/groups.js'
 import { useQuestionStore } from '@/stores/questions.js'
+import { API_URL } from '@/utils/config.js'
 
 export default {
   components: {
@@ -135,7 +136,8 @@ export default {
           }
         }
         return (
-          'http://localhost:3000/quiz/collection?group=' +
+          API_URL +
+          '/quiz/collection?group=' +
           idArr[0] +
           '&group=' +
           idArr[1] +
@@ -148,7 +150,8 @@ export default {
         )
       } else {
         return (
-          'http://localhost:3000/quiz/collection?group=' +
+          API_URL +
+          '/quiz/collection?group=' +
           this.groupStore.groupsArray[0].id +
           '&group=' +
           this.groupStore.groupsArray[1].id +
@@ -174,7 +177,7 @@ export default {
     }
   },
   created() {
-    fetch('http://localhost:3000/groups')
+    fetch(API_URL + '/groups')
       .then((response) => response.json())
       .then((jsondata) => {
         this.groups = jsondata

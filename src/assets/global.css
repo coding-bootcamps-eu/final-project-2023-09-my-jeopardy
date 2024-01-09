@@ -4,6 +4,7 @@
   --primary-background-color: #88b7c6;
   --secondary-background-color: #589bac;
   font-family: 'Akaya Kanadaka', display;
+  box-sizing: border-box;
 }
 .body {
   height: 100%;
