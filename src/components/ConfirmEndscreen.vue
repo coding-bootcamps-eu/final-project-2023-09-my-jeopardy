@@ -3,8 +3,8 @@
     <div class="popup-inner btn">
       <h2>Quiz beenden</h2>
       <p>Möchtest du das Quiz wirklich jetzt beenden ?</p>
-      <v-btn to="/endscreen">Ja</v-btn>
-      <v-btn @click="ClosePopup()">Nein</v-btn>
+      <v-btn class="color" to="/endscreen">Ja</v-btn>
+      <v-btn class="color" @click="ClosePopup()">Nein</v-btn>
     </div>
   </div>
 </template>

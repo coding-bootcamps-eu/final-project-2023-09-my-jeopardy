@@ -5,6 +5,8 @@ import HomeScreenView from '@/views/HomeScreenView.vue'
 import QuizTemplateView from '@/views/QuizTemplateView.vue'
 import QuestionTemplateView from '@/views/QuestionTemplateView.vue'
 import EndScreenView from '@/views/EndScreenView.vue'
+import QuizDataOverview from '@/views/QuizDataOverview.vue'
+import AddCategoryview from '@/views/AddCategoryview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,16 @@ const router = createRouter({
       path: '/question',
       name: 'question',
       component: QuestionTemplateView
+    },
+    {
+      path: '/quizdata',
+      name: 'quizdata',
+      component: QuizDataOverview
+    },
+    {
+      path: '/addcategory',
+      name: 'addcategory',
+      component: AddCategoryview
     }
   ]
 })
