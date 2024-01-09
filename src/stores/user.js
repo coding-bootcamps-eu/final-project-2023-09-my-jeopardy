@@ -15,6 +15,8 @@ export const useUserStore = defineStore('userstore', {
       this.playerarray[1].playername = usersnameTwo
       this.playerarray[0].playerpoints = 0
       this.playerarray[1].playerpoints = 0
+      this.playerarray[0].active = true
+      this.playerarray[1].active = false
     }
   }
 })
