@@ -116,7 +116,6 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
-      //this.groupStore.sortGroups(this.selectedGroups)
     },
     getGroupNames() {
       const arr = []

@@ -114,7 +114,7 @@ export default {
     finishQuiz() {
       let endscreen = true
       for (let i = 0; i < this.questionStore.questions.data.length; i++) {
-        if (!this.questionStore.questions.data.played) {
+        if (!this.questionStore.questions.data[i].played) {
           endscreen = false
         }
       }
