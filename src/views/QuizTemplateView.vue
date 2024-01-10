@@ -2,7 +2,11 @@
   <body class="body">
     <h1 class="headline">My Jeopardy</h1>
     <div class="category-container">
-      <div class="category" :key="category.id" v-for="category in this.groupStore.sortedGroups">
+      <div
+        class="category"
+        :key="category.id"
+        v-for="category in this.groupStore.sortedGroups.slice(0, 5)"
+      >
         <QuizCategory :category="category.title" />
       </div>
     </div>

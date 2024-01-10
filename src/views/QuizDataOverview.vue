@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { API_URL } from '@/utils/config.js'
 export default {
   data() {
     return {
@@ -33,7 +34,7 @@ export default {
   },
   methods: {
     getQuizData() {
-      fetch('http://localhost:3000/groups?_embed=questions')
+      fetch(API_URL + '/groups?_embed=questions')
         .then((res) => res.json())
         .then((jsondata) => {
           this.Quiz = jsondata

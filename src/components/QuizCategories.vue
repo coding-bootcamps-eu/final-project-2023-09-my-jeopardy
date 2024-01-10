@@ -1,7 +1,7 @@
 <template>
   <h2 class="category-name">{{ category }}</h2>
 
-  <div class="Question" v-for="question in questionArray" :key="question.id">
+  <div class="Question" v-for="question in questionArray.slice(0, 5)" :key="question.id">
     <routeButton
       class="singleQuestion"
       :route="{ name: 'question', query: { id: question.id, category: category } }"

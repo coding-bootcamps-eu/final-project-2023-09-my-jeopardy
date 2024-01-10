@@ -11,13 +11,21 @@ export const usegroupStore = defineStore('groupStore', {
     initGroups(groups) {
       this.groupsArray = groups
     },
-    sortGroups(idArr) {
-      if (idArr === '') {
+    sortGroups(categorys) {
+      console.log(categorys)
+      if (categorys !== '') {
         this.sortedGroups = []
-        for (let i = 0; i < idArr.length; i++) {
+        for (let i = 0; i < categorys.length; i++) {
+          console.log(
+            this.groupsArray.filter((Group) => {
+              if (Group.title === categorys[i]) {
+                return Group
+              }
+            })
+          )
           this.sortedGroups.push(
             this.groupsArray.filter((Group) => {
-              if (Group.title === idArr[i]) {
+              if (Group.title === categorys[i]) {
                 return Group
               }
             })[0]
@@ -31,6 +39,7 @@ export const usegroupStore = defineStore('groupStore', {
         ;[this.groupsArray[i], this.groupsArray[j]] = [this.groupsArray[j], this.groupsArray[i]]
       }
       this.sortedGroups = this.groupsArray
+      //this.sortGroups.slice(0, 5)
     }
   }
 })
