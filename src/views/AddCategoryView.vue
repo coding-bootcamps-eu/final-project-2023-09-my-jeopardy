@@ -38,11 +38,18 @@
     </v-carousel>
     <v-btn @click="testCategory()" class="btn">Save</v-btn>
     <v-btn to="/quizdata" class="btn">Back</v-btn>
+    <saveCategory v-if="showPopup" />
   </body>
 </template>
 
 <script>
+import saveCategory from '@/components/saveCategory.vue'
+import { API_URL } from '@/utils/config.js'
+
 export default {
+  components: {
+    saveCategory
+  },
   data() {
     return {
       Questions: [
@@ -179,7 +186,8 @@ export default {
       ],
       rightAnswer: [5, 5, 5, 5, 5],
       categorytestOK: false,
-      categoryName: ''
+      categoryName: '',
+      showPopup: false
     }
   },
   methods: {
@@ -221,7 +229,7 @@ export default {
     },
     saveCategory() {
       const category = { title: this.categoryName }
-      fetch('http://localhost:3000/groups', {
+      fetch(API_URL + '/groups', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(category)
@@ -242,7 +250,7 @@ export default {
           groupId: groupid
         }
 
-        fetch('http://localhost:3000/questions', {
+        fetch(API_URL + '/questions', {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
           body: JSON.stringify(test)
@@ -251,7 +259,10 @@ export default {
             console.log(res)
             return res.json()
           })
-          .then((jsondata) => console.log(jsondata))
+          .then((jsondata) => {
+            console.log(jsondata)
+            this.showPopup = true
+          })
       }
     }
   }

@@ -29,7 +29,7 @@
 import { useQuestionStore } from '@/stores/questions.js'
 import { useUserStore } from '@/stores/user.js'
 import PlayerStats from '@/components/PlayerStats.vue'
-
+import { API_URL } from '@/utils/config.js'
 export default {
   components: {
     PlayerStats
@@ -93,7 +93,7 @@ export default {
     getAnswer(id, answer) {
       this.disabled = true
       const result = { data: [{ id: id, selected: [answer] }] }
-      fetch('http://localhost:3000/quiz/result', {
+      fetch(API_URL + '/quiz/result', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

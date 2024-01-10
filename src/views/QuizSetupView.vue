@@ -116,7 +116,7 @@ export default {
     },
     saveToPinia() {
       this.userStore.initUser(this.playerOne, this.playerTwo)
-      this.groupStore.sortGroups(this.selectedGroups)
+      //this.groupStore.sortGroups(this.selectedGroups)
     },
     getGroupNames() {
       const arr = []
@@ -188,7 +188,7 @@ export default {
   watch: {
     selectedGroups: {
       handler(newValues) {
-        console.log(this.selectedGroups)
+        this.groupStore.sortGroups(this.selectedGroups)
         for (let i = 0; i < this.selectedGroups.length; i++) {
           for (let j = i + 1; j < this.selectedGroups.length; j++) {
             if (newValues[i] === newValues[j]) {

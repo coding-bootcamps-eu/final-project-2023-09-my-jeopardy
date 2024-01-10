@@ -41,6 +41,7 @@
 import { useUserStore } from '@/stores/user.js'
 import routeButton from '@/components/routeButton.vue'
 import HighScorePopup from '@/components/HighScorePopup.vue'
+import { API_URL } from '@/utils/config.js'
 export default {
   setup() {
     const userStore = useUserStore()
@@ -81,7 +82,7 @@ export default {
       console.log(this.highscoreList)
     },
     fetchHighscore() {
-      fetch('http://localhost:3000/highscore')
+      fetch(API_URL + '/highscore')
         .then((request) => request.json())
         .then((jsondata) => {
           this.highscoreList = jsondata
@@ -89,12 +90,12 @@ export default {
         })
     },
     fetchDelete(id) {
-      fetch('http://localhost:3000/highscore/' + id, {
+      fetch(API_URL + '/highscore/' + id, {
         method: 'DELETE'
       })
     },
     fetchCreate(player) {
-      fetch('http://localhost:3000/highscore', {
+      fetch(API_URL + '/highscore', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(player)
