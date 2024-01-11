@@ -18,6 +18,7 @@
       </tbody>
     </v-table>
     <v-btn class="btn" to="/addcategory">Add Category</v-btn>
+    <v-btn class="btn" to="/">Back</v-btn>
   </body>
 </template>
 
